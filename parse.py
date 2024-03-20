@@ -26,13 +26,13 @@ def parse_excel_to_cytoscape(file_name, century):
     for node in source_nodes:
         cytoscape_nodes.append(
             {
-                'data': {'id': to_snake_case(node), 'label': node},
+                'data': {'id': to_snake_case(node), 'label': node, 'class': 'source'},
             }
         )
     for node in target_nodes:
         cytoscape_nodes.append(
             {
-                'data': {'id': to_snake_case(node), 'label': node},
+                'data': {'id': to_snake_case(node), 'label': node, 'class': 'target'},
             }
         )
 
