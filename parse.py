@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 from collections import namedtuple
 import re
+from numbers_parser import Document
 
 # https://stackoverflow.com/a/69079951
 def to_snake_case(string):
@@ -9,8 +10,12 @@ def to_snake_case(string):
     return ''.join(string.lower())
 
 def parse_excel_to_cytoscape(file_name, century):
-    file = pd.ExcelFile(file_name)
-    df = file.parse()
+    doc = Document(file_name)
+    sheets = doc.sheets
+    tables = sheets[0].tables
+    data = tables[0].rows(values_only=True)
+    df = pd.DataFrame(data[1:], columns=data[0])
+    
     df_for_century = df.dropna(subset=[century])
 
     source_nodes = set()

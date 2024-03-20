@@ -10,7 +10,7 @@ if __name__ == '__main__':
                     description='What the program does',
                     epilog='Text at the bottom of help')
 
-    parser.add_argument('-file', type=str, default='Final_Database_Aoristic.xlsx')
+    parser.add_argument('-file', type=str, default='Final_Database_Aoristic.numbers')
     parser.add_argument('-century', type=int, required=True)
 
     args = parser.parse_args()
