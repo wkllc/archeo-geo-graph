@@ -35,7 +35,7 @@ def parse_imports(node_coordinates, file_name, century):
 def visualize(nodes, edges):
     G = nx.DiGraph()
     G.add_nodes_from(nodes.keys())
-    ebunch = list(map(lambda e: (e.source, e.target, {"edge":e}), edges))
+    ebunch = list(map(lambda e: (e.source, e.target, {"quantity": e.quantity, "percent_imports": e.percent_imports, "percent_of_all_for_site": e.percent_of_all_for_site}), edges))
     G.add_edges_from(ebunch)
 
     positions = nodes
@@ -45,28 +45,19 @@ def visualize(nodes, edges):
     d = {'city': cities, 'geometry': list(map(Point, geometry))}
     gdf = geopandas.GeoDataFrame(d, crs="WGS84")
 
+    print(nx.average_neighbor_degree(G, source="out", target="in", weight="quantity"))
     # plot with a nice basemap
-    ax = gdf.plot(marker=".", color="orangered", figsize=(9,9))
-    try:  # For issues with downloading/parsing basemaps in CI
-        cx.add_basemap(ax, crs=gdf.crs, source=cx.providers.CartoDB.VoyagerNoLabels, zoom=6)
-    except:
-        print("Could not add basemap")
-        pass
-    ax.set_title("Map")
-    ax.axis("off")
-    ax.set_xlim(-20, 50)
-    ax.set_ylim(-20, 60)
+    # ax = gdf.plot(marker=".", color="orangered", figsize=(9,9))
+    # try:  # For issues with downloading/parsing basemaps in CI
+    #     cx.add_basemap(ax, crs=gdf.crs)
+    # except:
+    #     print("Could not add basemap")
+    #     pass
+    # ax.set_title("Map")
+    # ax.axis("off")
+    # nx.draw(G, positions, with_labels=True, ax=ax, node_size=5, node_color="b")
+    # plt.show()
 
-    node_colors = {'Sofia': 'blue', 'Belgrade':'blue', 'Varna':'blue', 'Izmir':'blue', 'Mytilini':'blue',}
-    node_color_list = [node_colors.get(node, 'black') for node in G.nodes()]
-
-    nx.draw(G, positions, ax=ax, node_size=60, edge_color='black', alpha=0.5, arrows=True, arrowsize=15)
-    nx.draw_networkx_nodes(G, positions, node_color=node_color_list, 
-            node_size=60, alpha=0.5, linewidths=0,)
-
-    nx.draw_networkx_labels(G, positions, font_size=10, verticalalignment='top')
-
-    plt.show()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -75,12 +66,10 @@ if __name__ == '__main__':
                     epilog='Text at the bottom of help')
 
     parser.add_argument('-coordinates', type=str, default="Coordinates_version3.csv")
-    parser.add_argument('-imports', type=str, default="imports_percent_detailed_version4.csv")
+    parser.add_argument('-imports', type=str, default="imports_percent_combined_version3.csv")
     parser.add_argument('-century', required=True, type=int)
 
     args = parser.parse_args()
     node_coordinates = parse_coordinates(args.coordinates)
     nodes, edges = parse_imports(node_coordinates, args.imports, args.century)
-
     visualize(nodes, edges)
-

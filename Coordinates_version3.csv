@@ -1,6 +1,6 @@
 Node;N;E;Z
 Abisola_Italy;44.36667;8.46667;0.0
-Akchalaan;40.67228;31.42872N;0.0
+Akchalaan;40.67228;31.42872;0.0
 Belgrade;44.80401;20.46513;0.0
 North_Sebia_South_Hungary;46.1;19.66667;0.0
 Central_Europe;50.28762;15.1903;0.0
@@ -25,13 +25,13 @@ Miletus;37.51278;27.27917;0.0
 Miletus_Iznik;37.51278;27.27917;0.0
 Montelupo_Italy;43.94961;12.46828;0.0
 Mytilini;39.10772;26.55529;0.0
-Levant;36.60374;44.50724;0.0
+Levant;34;36;0.0
 Orvieto_Italy;42.71924;12.11249;0.0
 Sofia;42.69751;23.32415;0.0
 South_Italy;40.40542;15.93279;0.0
 Syria;35.0;38.0;0.0
 Thuringia;50.91667;11.0;0.0
-Tuscany;43.77925;11.24626;0.0
+Tuscany_Italy;43.77925;11.24626;0.0
 Valencia_Spain;39.47391;-0.37966;0.0
 Varna;43.21667;27.91667;0.0
 Vienna;48.20849;16.37208;0.0
