@@ -33,6 +33,7 @@ scipy==1.13.0 #maybe not
 shapely==2.0.4
 six==1.16.0
 snuggs==1.4.7
+tabulate==0.9.0
 tzdata==2024.1
 urllib3==2.2.1
 xyzservices==2024.4.0
