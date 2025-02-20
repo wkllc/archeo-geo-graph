@@ -48,7 +48,7 @@ def visualize(nodes, edges):
     
     #change the colour of the nodes for only some nodes - blue for local source nodes, red for target nodes
     node_colors = {'Sofia': ('#AD5260'), 'Belgrade': ('#AD5260'), 'Varna': ('#AD5260'), 'Izmir': ('#AD5260'), 'Mytilini': ('#AD5260'), 'Northwest_Anatolia':('#607E9F'), 
-    'Northwest_Anatolia':('#607E9F'), 'Chanakkale':('#607E9F'), 'Didymoteicho':('#607E9F')}
+    'Northwest_Anatolia':('#607E9F'), 'Chanakkale':('#607E9F'), 'Didymoteicho':('#607E9F'), 'Levantt':('#607E9F'), 'Ephesus':('#607E9F')}
     node_color_list = [('#64513D')] * len(G.nodes()) #colour for the rest of the nodes
 
     # Create a mapping from nodes for the colouring
@@ -64,7 +64,7 @@ def visualize(nodes, edges):
     edge_colors = []
     for edge in G.edges():
         source, target = edge
-        if source in {"Northwest_Anatolia", "Chanakkale", "Didymoteicho"}:
+        if source in {'Northwest_Anatolia', 'Chanakkale', 'Didymoteicho', 'Levantt', 'Ephesus'}:
             edge_colors.append('#3D5064')  
         else:
             edge_colors.append('#202020')  

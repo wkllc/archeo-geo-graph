@@ -30,13 +30,14 @@ def analyse(nodes, edges):
     #nx.draw_networkx(G, positions)
     #plt.show()
 
-    print('Average neighbor indegree',nx.average_neighbor_degree(G, source="in", weight='percent_import'))
-    print('Indegree centrality', nx.in_degree_centrality(G))
-    print('Outdegree centrality', nx.out_degree_centrality(G))
-    print('Is this network weedly connected',nx.is_weakly_connected(G))
-    print('Karz centrality',nx.katz_centrality(G, weight='percent_imports"'))
-    print('Page rank', nx.pagerank(G, weight='percent_import'))
-    print('HITS', nx.hits(G))
+    print('Average neighbor indegree',nx.average_neighbor_degree(G, source="in+out"))
+    print('Average neighbor indegree',nx.average_neighbor_degree(G, source="in"))
+
+    #print('Indegree centrality', nx.in_degree_centrality(G))
+    #print('Outdegree centrality', nx.out_degree_centrality(G))
+    #print('Katz centrality',nx.katz_centrality(G))
+    #print('Page rank', nx.pagerank(G))
+    #print('HITS', nx.hits(G))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -46,9 +47,10 @@ if __name__ == '__main__':
 
     parser.add_argument('-coordinates', type=str, default="Coordinates_version3.csv")
     parser.add_argument('-imports', type=str, default="imports_percent_combined_version4.csv")
-    parser.add_argument('-century', type=int, default='16')
+    parser.add_argument('-century', type=int, default='18')
 
     args = parser.parse_args()
     node_coordinates = parse_coordinates(args.coordinates)
     nodes, edges = parse_imports(node_coordinates, args.imports, args.century)
     analyse(nodes, edges)
+    
