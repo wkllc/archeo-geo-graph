@@ -137,8 +137,8 @@ if __name__ == '__main__':
                     description='What the program does',
                     epilog='Text at the bottom of help')
 
-    parser.add_argument('-coordinates', type=str, default="Coordinates_version3.csv")
-    parser.add_argument('-imports', type=str, default="imports_percent_combined_version4.csv")
+    parser.add_argument('-coordinates', type=str, default="Coordinates.csv")
+    parser.add_argument('-imports', type=str, default="imports_percent_combined.csv")
     parser.add_argument('-century', required=False, type=int, default='15')
 
     args = parser.parse_args()
