@@ -9,7 +9,6 @@ import geopandas
 
 import argparse
 import pandas as pd
-import pprint
 
 #load the csv file 
 def parse_coordinates(file_name):
@@ -123,33 +122,12 @@ def visualize(nodes, edges):
             labels_to_draw[node] = node
 
     label_positions = {node: (pos[0], pos[1] + 0.3) for node, pos in positions.items()}
+    #add labels that need to be changed; example:
     #label_positions['Didymoteicho'] = (label_positions['Didymoteicho'][0] - 0.4, label_positions['Didymoteicho'][1] + 0.0)
-    #label_positions['Chanakkale'] = (label_positions['Chanakkale'][0] - 1, label_positions['Chanakkale'][1] + 0.0)
-    #label_positions['Vienna'] = (label_positions['Vienna'][0] - 2.5, label_positions['Vienna'][1] + 0.2)
-
-
 
     #draw network labels
     nx.draw_networkx_labels(G, label_positions, labels=labels_to_draw, font_size=14, font_color=('#202020'), font_weight='bold', 
     horizontalalignment='left', verticalalignment='bottom') 
-
-    #draw edge labels for China - manually fix for each century, unfortunately
-
-    edges_to_hide = [ ('China', 'Belgrade'), ('China', 'Sofia'), ('China','Izmir'),('China','Varna')] #hide edge labels for visualisaion purposes
-
-    edge_labels = {}
-    label_edge_positions = {}
-    for u, v, data in G.edges(data=True):
-        if u in ('China', 'Japan') and (u, v) not in edges_to_hide:
-            edge_labels[(u, v)] = u
-            label_edge_positions[(u, v)] = positions[u]
-
-    edge_label_positions = {key: (pos[0] - 42, pos[1] +2.2) for key, pos in positions.items()} #change the location for the China label
-
-
-    # edge_labels = nx.get_edge_attributes(G, 'percent_imports') edge labels for the percent import
-    nx.draw_networkx_edge_labels(G, edge_label_positions, edge_labels, font_size=14, font_color=('#202020'), font_weight='bold', 
-    horizontalalignment='left', bbox=dict(facecolor='none', edgecolor='none'))
 
     plt.show()
 
