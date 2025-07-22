@@ -37,6 +37,7 @@ def load_extract_imports(fpath: str = default_imports_file,
 def load_network_data(coordinates_file: str = default_coordinates_file, 
                       imports_file: str = default_imports_file, 
                       century: int = 15,
+                      query_node: str = None,
                       coordinates_sep: str = ';',
                       imports_sep: str = ';') -> tuple[pd.DataFrame, pd.DataFrame]:
     """
@@ -59,7 +60,8 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
     # Load archeological imports data, rename features
     importsDF = load_extract_imports(imports_file, century, one_hot=True, imports_sep=imports_sep)
     edges_df = importsDF.rename(columns={'Source node': 'source', 'Target node': 'target'})
-
+    if query_node:
+        edges_df = edges_df[(edges_df['source'] == query_node) | (edges_df['target'] == query_node) ]
     # Load coordinates data and drop irrelevant 'Z' coordinate feature, rename features
     coordinatesDF = pd.read_csv(coordinates_file, sep=coordinates_sep)
     if 'Z' in coordinatesDF.columns:
@@ -74,6 +76,7 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
     nodes_df = pd.merge(relevant_nodes, nodes_df, left_on='Node', right_on='Node', how='left')
 
     return nodes_df, edges_df
+
 
 if __name__ == '__main__':
     nodes, edges = load_network_data(century=17)
