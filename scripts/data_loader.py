@@ -45,9 +45,8 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
         
     Returns:
         Tuple of DataFrames (nodes, edges):
-            - nodes: DataFrame with node coordinates (columns: 'site', 'latitude', 'longitude')
-                - 'lat' referse to latitude, 'lon' to longitude
-            - edges: DataFrame with imports data (columns: 'source', 'target', 'quantity', 'percent_imports', '% of all pottery for site per century')
+            - nodes: DataFrame with node coordinates (columns: 'Node', 'latitude', 'longitude')
+            - edges: DataFrame with imports data (columns: 'source', 'target', 'quantity', 'percent_imports', 'percent_all_pottery')
     """
 
     # Load archeological imports data, rename features
@@ -57,7 +56,7 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
 
     # Load coordinates data and drop irrelevant 'Z' coordinate feature, rename features
     nodes_df = pd.read_csv(coordinates_file, sep=coordinates_sep)
-    nodes_df.rename(columns={'site': 'Node', 'latitude': 'lat', 'longitude': 'lon'}, inplace=True)
+    nodes_df.rename(columns={'site': 'Node'}, inplace=True)
 
     # find out nodes relevant to the quieried imports data
     relevant_nodes = edges_df[['source', 'target']].melt().drop_duplicates() # get all nodes from both source and target columns

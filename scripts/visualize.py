@@ -23,8 +23,8 @@ def visualize(nodes, edges):
                                     create_using=nx.DiGraph())
     
     # define plt figure - set the limits of the map before adding the basemap for best results
-    xlim = nodes.min().lon - 5, nodes.max().lon + 5
-    ylim = nodes.min().lat - 5, nodes.max().lat + 5
+    xlim = nodes.min().longitude - 5, nodes.max().longitude + 5
+    ylim = nodes.min().latitude - 5, nodes.max().latitude + 5
     fig, ax = plt.subplots(figsize=(9, 9))
     ax.set_title("Trade in the Ottoman Empire")
     ax.axis("off")
