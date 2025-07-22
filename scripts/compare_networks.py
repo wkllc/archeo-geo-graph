@@ -6,7 +6,7 @@ from collections import namedtuple
 import argparse
 import pandas as pd
 
-from scripts.data_loader import load_network_data
+from scripts.data_utils import load_network_data
 
 def network_comparison(imports_path, coordinates_path, century_1, century_2):
     """
