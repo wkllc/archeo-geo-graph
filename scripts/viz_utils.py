@@ -36,18 +36,18 @@ def generate_node_color_list(G : nx.DiGraph) -> list:
     Returns:
         List of colors for each node in the graph.
     """
-    node_color_list = [("#6D4A25")] * len(G.nodes())  # Default color for nodes
+    node_color_list = [DEFAULT_NODE_COLOR] * len(G.nodes())  # Default color for nodes
     # Create a mapping from nodes for the colouring
     for i, node in enumerate(G.nodes()):
         in_degree = G.in_degree(node)
         out_degree = G.out_degree(node)
 
         if in_degree > 0 and out_degree > 0:
-            node_color_list[i] = "#FF9100" # both incoming and outgoing edges
+            node_color_list[i] = BOTH_EDGES_COLOR  # both incoming and outgoing edges
         elif in_degree > 0:
-            node_color_list[i] = "#D61331" # only incoming edges
+            node_color_list[i] = INCOMING_EDGES_COLOR  # only incoming edges
         elif out_degree > 0:
-            node_color_list[i] = "#1565BB" # only outgoing edges
+            node_color_list[i] = OUTGOING_EDGES_COLOR  # only outgoing edges
 
     return node_color_list
 
