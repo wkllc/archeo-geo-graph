@@ -11,7 +11,7 @@ import argparse
 import pandas as pd
 import pprint
 
-from scripts.data_loader import load_network_data
+from scripts.data_utils import load_network_data
 from scripts.viz_utils import *
 
 
