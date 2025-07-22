@@ -5,11 +5,12 @@ currentDirectory = Path.cwd()
 while currentDirectory.name != 'archeo-geo-graph':
     currentDirectory = currentDirectory.parent
 data = currentDirectory / 'data'
-default_imports_file = data /"imports_percent_combined_version4.csv"
-default_coordinates_file = data / "Coordinates.csv"
+default_imports_file = data /"imports_combined.csv"
+default_coordinates_file = data / "coordinates.csv"
 
 def load_extract_imports(fpath: str = default_imports_file, 
-                        century: int = 15, one_hot: bool = True, imports_sep: str = ';') -> pd.DataFrame:
+                        century: int = 15,
+                        imports_sep: str = ',') -> pd.DataFrame:
     """
     Extract archeological imports data for a specific century.
     
@@ -23,23 +24,16 @@ def load_extract_imports(fpath: str = default_imports_file,
         DataFrame with imports data for the specified century.
     """
     df = pd.read_csv(fpath, sep=imports_sep)
-    if one_hot:
-        # Filter columns for the specified century
-        df_for_century = df.dropna(subset=[str(century)])
-        cols_to_drop = [str(cent) for cent in range(10, 21) if str(cent) in df_for_century.columns]
-        importsDataFrame = df_for_century.drop(columns=cols_to_drop)
-        return importsDataFrame
-    else:
-        df_for_century = df[df['century'] == century]
-        importsDataFrame = df_for_century.drop(columns=['century'])
-        return importsDataFrame
+    df_for_century = df[df['century'] == century]
+    importsDataFrame = df_for_century.drop(columns=['century'])
+    return importsDataFrame
 
 def load_network_data(coordinates_file: str = default_coordinates_file, 
                       imports_file: str = default_imports_file, 
                       century: int = 15,
                       query_node: str = None,
-                      coordinates_sep: str = ';',
-                      imports_sep: str = ';') -> tuple[pd.DataFrame, pd.DataFrame]:
+                      coordinates_sep: str = ',',
+                      imports_sep: str = ',') -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Load nodes and edges of archeological imports data for a given century.
     
@@ -52,21 +46,19 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
         
     Returns:
         Tuple of DataFrames (nodes, edges):
-            - nodes: DataFrame with node coordinates (columns: 'Node', 'lat', 'lon')
+            - nodes: DataFrame with node coordinates (columns: 'site', 'latitude', 'longitude')
                 - 'lat' referse to latitude, 'lon' to longitude
-            - edges: DataFrame with imports data (columns: 'source', 'target', 'quantity', '% of imports for site per century', '% of all pottery for site per century')
+            - edges: DataFrame with imports data (columns: 'source', 'target', 'quantity', 'percent_imports', '% of all pottery for site per century')
     """
 
     # Load archeological imports data, rename features
-    importsDF = load_extract_imports(imports_file, century, one_hot=True, imports_sep=imports_sep)
-    edges_df = importsDF.rename(columns={'Source node': 'source', 'Target node': 'target'})
+    edges_df = load_extract_imports(imports_file, century, one_hot=False, imports_sep=imports_sep)
     if query_node:
         edges_df = edges_df[(edges_df['source'] == query_node) | (edges_df['target'] == query_node) ]
+
     # Load coordinates data and drop irrelevant 'Z' coordinate feature, rename features
-    coordinatesDF = pd.read_csv(coordinates_file, sep=coordinates_sep)
-    if 'Z' in coordinatesDF.columns:
-        coordinatesDF = coordinatesDF.drop(columns=['Z'])
-    nodes_df = coordinatesDF.rename(columns={'N': 'lat', 'E': 'lon'})
+    nodes_df = pd.read_csv(coordinates_file, sep=coordinates_sep)
+    nodes_df.rename(columns={'site': 'Node', 'latitude': 'lat', 'longitude': 'lon'}, inplace=True)
 
     # find out nodes relevant to the quieried imports data
     relevant_nodes = edges_df[['source', 'target']].melt().drop_duplicates() # get all nodes from both source and target columns

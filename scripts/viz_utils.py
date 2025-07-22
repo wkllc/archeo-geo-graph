@@ -48,7 +48,7 @@ def generate_node_color_list(G):
 
     return node_color_list
 
-def generate_edge_alphas(edges, weight_feature='% of imports for site per century', min_alpha=0.3, max_alpha=0.8):
+def generate_edge_alphas(edges, weight_feature='percent_imports', min_alpha=0.3, max_alpha=0.8):
     """
     Generate edge alphas based on the weight feature.
 

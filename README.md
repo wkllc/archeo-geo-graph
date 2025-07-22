@@ -2,6 +2,14 @@
 
 TODO: Consult Tsveta for better summary
 
+## Dataset
+
+* `coordinates.csv` contains the latitude and longitude coordinates of archeological sites
+* `imports_detailed.csv` contains the following information for trade route specified by a `source` and `target` site:
+    * % of imports for site per century - variable `percent_imports`
+    * % of all pottery for site per century - variable `percent_all_pottery`
+* `imports_combined.csv` combines regions with multiple sites into a single site/node - e.g. Italian sites
+
 ## Graph Theory analysis
 
 Placeholder: Graph theory provides us with statistical methods that can shine new light on historical trades.

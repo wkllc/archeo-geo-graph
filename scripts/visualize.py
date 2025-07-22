@@ -83,7 +83,7 @@ def visualize(nodes, edges):
     # get the positions of nodes
     edge_label_positions = nodesDF_to_positions(nodes) #, x_offset= -42, y_offset = 2.2)
     # select the weight feature
-    weight_feature = '% of imports for site per century'
+    weight_feature = 'percent_imports'
     # get the actual labels
     edge_labels = nx.get_edge_attributes(G, weight_feature)
     nx.draw_networkx_edge_labels(G, 
@@ -110,8 +110,8 @@ if __name__ == '__main__':
                     description='What the program does',
                     epilog='Text at the bottom of help')
 
-    parser.add_argument('-coordinates', type=str, default="data/Coordinates.csv")
-    parser.add_argument('-imports', type=str, default="data/imports_percent_combined_version4.csv")
+    parser.add_argument('-coordinates', type=str, default="data/coordinates.csv")
+    parser.add_argument('-imports', type=str, default="data/imports_combined.csv")
     parser.add_argument('-century', required=False, type=int, default='15')
     parser.add_argument('-query', required=False, type=str, default='Mytilini')
     
