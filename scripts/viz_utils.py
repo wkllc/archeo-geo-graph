@@ -1,6 +1,11 @@
 import pandas as pd
 import networkx as nx
 
+DEFAULT_NODE_COLOR = "#6D4A25"
+INCOMING_EDGES_COLOR = '#D61331'
+OUTGOING_EDGES_COLOR = '#1565BB'
+BOTH_EDGES_COLOR = '#FF9100'
+
 def generate_proper_labels(G : nx.DiGraph) -> dict:
     """
     Replace the names of nodes in the graph with proper labels.
