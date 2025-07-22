@@ -98,7 +98,10 @@ def visualize(nodes, edges):
                                     bbox={'facecolor': 'white', 'alpha': 0.9, 'pad': 2}
                                 )
 
-    provider = cx.providers.Stadia.StamenTerrainBackground(api_key=os.environ['STAMEN_API_KEY'])
+    api_key = os.environ.get('STAMEN_API_KEY')
+    if not api_key:
+        raise RuntimeError("Environment variable 'STAMEN_API_KEY' is not set. Please set it to access the Stamen Terrain Background API.")
+    provider = cx.providers.Stadia.StamenTerrainBackground(api_key=api_key)
     provider["url"] = provider["url"] + "?api_key={api_key}"
     cx.add_basemap(ax, crs='WGS84', source=provider, zoom='auto', alpha=0.6)
     plt.show()
