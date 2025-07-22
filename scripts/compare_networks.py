@@ -42,12 +42,12 @@ def network_comparison(imports_path, coordinates_path, century_1, century_2):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-                    prog='comapre_networks',
+                    prog='compare_networks',
                     description='Compare the network graphs of 2 different centuries',
                     epilog='made by Tsveta and Dimitar')
 
-    parser.add_argument('-coordinates', type=str, default="data/Coordinates.csv")
-    parser.add_argument('-imports', type=str, default="data/imports_percent_combined_version4.csv")
+    parser.add_argument('-coordinates', type=str, default="data/coordinates.csv")
+    parser.add_argument('-imports', type=str, default="data/imports_combined.csv")
     parser.add_argument('-century_1', required=False, type=int, default='15')
     parser.add_argument('-century_2', required=False, type=int, default='16')
 

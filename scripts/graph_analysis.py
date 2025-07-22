@@ -40,12 +40,12 @@ def graph_analysis(nodes, edges, plot_graph=True):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-                    prog='ProgramName',
-                    description='What the program does',
-                    epilog='Text at the bottom of help')
+                    prog='Run graph theory analysis on the trade networks',
+                    description='Evaluates average neighbor indegree of trade networks',
+                    epilog='Made by Tsveta and Dimitar')
 
-    parser.add_argument('-coordinates', type=str, default="data/Coordinates.csv")
-    parser.add_argument('-imports', type=str, default="data/imports_percent_combined_version4.csv")
+    parser.add_argument('-coordinates', type=str, default="data/coordinates.csv")
+    parser.add_argument('-imports', type=str, default="data/imports_combined.csv")
     parser.add_argument('-century', type=int, default='18')
 
     args = parser.parse_args()

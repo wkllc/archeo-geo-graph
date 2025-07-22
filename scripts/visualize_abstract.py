@@ -82,8 +82,9 @@ if __name__ == '__main__':
     parser.add_argument('-coordinates', type=str, default="data/coordinates.csv")
     parser.add_argument('-imports', type=str, default="data/imports_combined.csv")
     parser.add_argument('-century', required=False, type=int, default='15')
+    parser.add_argument('-query', required=False, type=str, default=None)
 
     args = parser.parse_args()
-    nodes, edges = load_network_data(coordinates_file=args.coordinates, imports_file=args.imports, century=args.century)
+    nodes, edges = load_network_data(coordinates_file=args.coordinates, imports_file=args.imports, century=args.century, query_node=args.query)
 
     visualize(nodes, edges)
