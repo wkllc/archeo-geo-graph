@@ -118,7 +118,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     load_dotenv()
-    # print(os.getenv('STAMEN_API_KEY'))
     nodes, edges = load_network_data(coordinates_file=args.coordinates, imports_file=args.imports, century=args.century, query_node=args.query)
 
     visualize(nodes, edges)

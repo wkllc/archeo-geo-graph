@@ -12,11 +12,16 @@ TODO: Consult Tsveta for better summary
 
 ## Graph Theory analysis
 
-Placeholder: Graph theory provides us with statistical methods that can shine new light on historical trades.
+Graph theory provides us with statistical methods that can shine new light on historical trades.
 
-## Visual analysis
-
-By treating trade routes as directed graphs and weighing them by the number of imports we can gain new insights into the trade connections between cities and states.
+For this project 3 main scripts were developed:
+* `graph_analysis.py`
+    - computes degree of connectedness of a trade network
+* `compare_networks.py`
+    - compares the distance between two networks, offering insight into difference between e.g. 2 centuries
+* `visualize.py`
+    - creates a visualization of the trade network, using a world map
+    * `visualize_abstract.py` creates the same visualization but wihtout the world map, for more abstract visualization
 
 ## Running the analaysis
 
@@ -30,6 +35,7 @@ or
 ```bash
 python -m scripts.visualize -query 'Mytilini'
 ```
-to produce pretty figures like
+to produce figures like:
+
 ![Network of Mytilini's trade routes from imports data](figures/Mytilini_network.png)
 
