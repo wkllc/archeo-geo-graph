@@ -26,3 +26,10 @@ By treating trade routes as directed graphs and weighing them by the number of i
 ```bash
 python -m scripts.graph_analysis
 ```
+or
+```bash
+python -m scripts.visualize -query 'Mytilini'
+```
+to produce pretty figures like
+![Network of Mytilini's trade routes from imports data](figures/Mytilini_network.png)
+
