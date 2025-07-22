@@ -17,7 +17,6 @@ def load_extract_imports(fpath: str = default_imports_file,
     Args:
         fpath: Path to the CSV file containing imports data.
         century: Century to extract data for (default: 18)
-        one_hot: If True, assumes centuries are one-hot encoded, if false it assumes a single 'century' feature/column.
         imports_sep: CSV separator for imports file.
         
     Returns:
@@ -52,7 +51,7 @@ def load_network_data(coordinates_file: str = default_coordinates_file,
     """
 
     # Load archeological imports data, rename features
-    edges_df = load_extract_imports(imports_file, century, one_hot=False, imports_sep=imports_sep)
+    edges_df = load_extract_imports(imports_file, century, imports_sep=imports_sep)
     if query_node:
         edges_df = edges_df[(edges_df['source'] == query_node) | (edges_df['target'] == query_node) ]
 
